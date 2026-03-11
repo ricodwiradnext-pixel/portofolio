@@ -1,22 +1,22 @@
-/**
- * STEP 17: THE JAVASCRIPT LOGIC
- * This script handles the interaction when the theme button is clicked.
- */
-
-// 1. We select the button from the HTML using its ID
 const themeBtn = document.getElementById('theme-toggle');
+const body = document.body;
 
-// 2. We add a 'click' event listener to the button
+// Cek tema yang tersimpan
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+    body.classList.add('dark-mode');
+    themeBtn.textContent = '☀️ Light Mode';
+}
+
 themeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
     
-    // 3. We toggle the 'dark-mode' class on the <body> tag
-    // This will trigger the Step 16 CSS rules we wrote earlier.
-    document.body.classList.toggle('dark-mode');
-    
-    // 4. (Optional) Provide feedback on the button itself
-    if (document.body.classList.contains('dark-mode')) {
-        themeBtn.textContent = 'Light Mode';
+    let theme = 'light';
+    if (body.classList.contains('dark-mode')) {
+        theme = 'dark';
+        themeBtn.textContent = '☀️ Light Mode';
     } else {
-        themeBtn.textContent = 'Dark Mode';
+        themeBtn.textContent = '🌙 Dark Mode';
     }
+    localStorage.setItem('theme', theme); // Simpan pilihan user
 });
